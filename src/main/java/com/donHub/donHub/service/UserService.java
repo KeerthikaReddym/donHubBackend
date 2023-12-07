@@ -31,7 +31,7 @@ public class UserService implements UserServiceI {
 
 	private final MongoTemplate mongoTemplate;
 
-	@Cacheable(value = "allUsersCache")
+	//@Cacheable(value = "allUsersCache")
 	@Override
 	public List<UserRequest> getAllUsers() {
 
@@ -42,7 +42,7 @@ public class UserService implements UserServiceI {
 		this.mongoTemplate = mongoTemplate;
 	}
 
-	@Cacheable(value = "userByIdCache", key = "#id")
+	//@Cacheable(value = "userByIdCache", key = "#id")
 	@Override
 	public UserRequest getUserById(Long id) {
 		// ObjectId objectId = new ObjectId(id);
@@ -51,7 +51,7 @@ public class UserService implements UserServiceI {
 
 	}
 
-	@CacheEvict(value = "allUsersCache", allEntries = true)
+	//@CacheEvict(value = "allUsersCache", allEntries = true)
 	@Override
 	public UserRequest createUser(UserRequest data) {
 		// check weather a user is authorized
@@ -93,7 +93,7 @@ public class UserService implements UserServiceI {
 		return null;
 	}
 
-	@CacheEvict(value = "allUsersCache", allEntries = true)
+	//@CacheEvict(value = "allUsersCache", allEntries = true)
 	@Override
 	public Boolean updateUser(Long id, UserRequest data) {
 		Query query = new Query(Criteria.where("customId").is(id));
@@ -110,7 +110,7 @@ public class UserService implements UserServiceI {
 		return result.getModifiedCount() > 0;
 	}
 
-	@CacheEvict(value = { "userByIdCache", "allUsersCache" }, key = "#id")
+	//@CacheEvict(value = { "userByIdCache", "allUsersCache" }, key = "#id")
 	@Override
 	public Boolean deleteUserById(Long id) {
 		userRepository.deleteById(id);
@@ -121,7 +121,7 @@ public class UserService implements UserServiceI {
 
 	}
 
-	@CacheEvict(value = "allUsersCache", allEntries = true)
+	//@CacheEvict(value = "allUsersCache", allEntries = true)
 	@Override
 	public Boolean deleteAll() {
 		userRepository.deleteAll();
